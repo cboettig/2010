@@ -4,6 +4,7 @@ http://www.carlboettiger.info/2010/atom.xml
 http://www.carlboettiger.info/2010/blog.xml  
 http://www.carlboettiger.info/2010/categories.html  
 http://www.carlboettiger.info/2010/index.html  
+http://www.carlboettiger.info/2010/lab-notebook.html  
 http://www.carlboettiger.info/2010/sitemap.txt  
 http://www.carlboettiger.info/2010/tags.html  
 http://www.carlboettiger.info/2010/wordpress/archives/4791/index.html  
