@@ -112,7 +112,7 @@
 <p> = (- ) ^2 ++ </p>
 <p>Excellent.  So the probability of N species after time t is given by a Gaussian with mean $ N_0 e^{(-)t} $ and variance</p>
 <p><span class="math">\[ \frac{\lambda+\mu}{\lambda-\mu} \left(e^{\alpha t} - 1\right) + N_0 e^{\alpha t}/\alpha - \gamma \]</span></p>
-<p>So we’re interested in the likelihood, i.e. the probability of $ P(| N) <span class="math">\(, for simplicity let \)</span> = 0$ for the moment.  The expected value is just $ N = N_0 e^{t} $ so that $ = (N/N_0)/t <span class="math">\(.  Meanwhile, the maximum likelihood estimator for \)</span>$ is the maximum of the above expression.  We can calculate this analytically in closed form,(help from wxmaxima).</p>
+<p>So we’re interested in the likelihood, i.e. the probability of $ P(| N) $, for simplicity let $ = 0$ for the moment.  The expected value is just $ N = N_0 e^{t} $ so that $ = (N/N_0)/t $.  Meanwhile, the maximum likelihood estimator for $$ is the maximum of the above expression.  We can calculate this analytically in closed form,(help from wxmaxima).</p>
 <p><span class="math">\[ \hat \lambda = \log\left( \frac{\sqrt{4 N_o^4-8 N_0^3N+ 4N_0^2N^2+1}}{2N_0^2}-\frac{1}{2N_0^2} +1\right)/t \]</span></p>
 <p>Which can be rewritten in terms of $ N/N_0$.</p>
 <figure>
@@ -123,7 +123,7 @@
 </figure>
 <p>Observe that this maximum likelihood value is strictly less than the expected value, i.e. solving in case $ N_0 = 1$  (need to clean chalkboard!)</p>
 <p><span class="math">\[ \frac{\log\left( \frac{\sqrt{4\,{N}^{2}-8\,N+5}}{2}+\frac{1}{2}\right) }{t} \]</span></p>
-<p>Also note though that the expected and maximum likelihood estimates agree in the reasonable limit $ N N_0<span class="math">\(.  The analytics are presumably closed form but far less tractable with \)</span> $ 0$. Will need to explore the extent of this possible disagreement further later…  Also have some exploratory code on this in rabosky_test.R in github.</p>
+<p>Also note though that the expected and maximum likelihood estimates agree in the reasonable limit $ N N_0$.  The analytics are presumably closed form but far less tractable with $ $ 0$. Will need to explore the extent of this possible disagreement further later…  Also have some exploratory code on this in rabosky_test.R in github.</p>
 <h3 id="generalizing-the-codebase">Generalizing the Codebase</h3>
 <p>Currently have focused on models fitted through the OUCH software.  The format of the power_between_models function in <a href="https://github.com/cboettig/Comparative-Phylogenetics/blob/ca68cfe595cc947eecd5c46beeabb2df190123ed/R/powertest.R">powertest.R</a> fails to generalize immediately only because ouch fits are proper fit objects that have methods like simulate and update already associated with them, and store their likelihood value in the S4 class format under object@loglik.  If the fits from geiger, etc, were modified to recognize the standard general methods, they’d work just as well in this routine.  Should certainly look into generalizing them, as it would be interesting to start applying the Monte Carlo approach to more methods.</p>
 <h3 id="back-to-likelihood-paper">Back to Likelihood paper…</h3>

@@ -162,11 +162,14 @@ h^2}) - e} \]</span></p>
 </table>
 <h3 id="test-of-higher-order-corrections">Test of higher order corrections</h3>
 <p>I try the higher order correction to the mean dynamics (accounts for inflation effect of the variance):</p>
-<p> E(n) = <em>1(n) +  ^2 </em>1’’(n)</p>
+<p> E(n) = _1(n) +  ^2 _1’’(n)</p>
 <p>Though not surprisingly, the effect is negligible. In this case the average is slightly higher (572.5) and variance slightly lower (1349), so the curvature at equilibrium must be positive (in contrast to the deflation example with logistic or Levins model). Perhaps this is a consequence of the ergodicity assumption failing; I’ll check against simply computing ensemble variance rather than the (mean-over-ensembles) time-averaged variance.</p>
 <h3 id="ensemble-averaging-simulation-does-match-theory-though-time-averaging-doesnt">Ensemble averaging simulation does match theory, though time averaging doesn’t</h3>
 <ul>
-<li>Okay, variance computed over ensembles only matches the theory (averaging over all time over an ensemble of 1000 I’m getting 1362 ensemble variance, while the time averaged (over a sampletime of 100, sample interval of .1, and max time 500) variance averaged over ensembles comes out a steady 2339. So much for ergodicity? <strong>Note:</strong> these conditions should match the code found in subversion revision 25.</li>
+<li>Okay, variance computed over ensembles only matches the theory (averaging over all time over an ensemble of 1000 I’m getting 1362 ensemble variance, while the time averaged (over a sampletime of 100, sample interval of .1, and max time 500) variance averaged over ensembles comes out a steady 2339. So much for ergodicity? <strong>Note:</strong> these conditions should match the code found in subversion revision
+<ol start="25" type="1">
+<li></li>
+</ol></li>
 </ul>
 <h2 id="reflections-on-warning-signals-literature">Reflections on Warning Signals literature</h2>
 <ul>

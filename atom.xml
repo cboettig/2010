@@ -4,7 +4,7 @@
  <title>Lab Notebook</title>
  <link href="/2010/atom.xml" rel="self"/>
  <link href="/"/>
- <updated>2015-01-02T05:44:51+00:00</updated>
+ <updated>2015-02-10T20:34:14+00:00</updated>
  <id>http://www.carlboettiger.info/2010</id>
  <author>
    <name>Carl Boettiger</name>
@@ -44,7 +44,7 @@
    <updated>2010-12-30T22:12:47+00:00</updated>
    <id>/12/30/stochastic-limits-to-evolutionary-branching</id>
    <content type="html">&lt;p&gt;My last post was a bit pessimistic, sometimes I can still miss the forest for the trees.  Hidden in those figures, the main point has been staring me in the face.  So let’s try this again.&lt;/p&gt;
-&lt;p&gt;Stochastic limits to evolutionary branching is the story of two dueling timescales.  The first timescale is that of the evolutionary process: the frequency of steps (mutation rate, $ &lt;span class=&quot;math&quot;&gt;\() and the size of the steps (mutation kernel standard deviation \)&lt;/span&gt; _{}$), on top of which we add the selection gradient, created by the ecology. The second timescale is that of ecological coexistence, which in low noise situations should be much longer, and hence irrelevant.&lt;/p&gt;
+&lt;p&gt;Stochastic limits to evolutionary branching is the story of two dueling timescales.  The first timescale is that of the evolutionary process: the frequency of steps (mutation rate, $ $) and the size of the steps (mutation kernel standard deviation $ _{}$), on top of which we add the selection gradient, created by the ecology. The second timescale is that of ecological coexistence, which in low noise situations should be much longer, and hence irrelevant.&lt;/p&gt;
 &lt;p&gt;While the approach to the branching point depends on the width of the resource kernel and is independent of the competition kernel.  At the branching point, how much narrower the competition kernel is compared to the resource kernel (in units of the mutational step size) determines how stable the coexistence of the early dimorphism is – the second timescale.  In most adaptive dynamics simulations this second timescale is irrelevant, being much longer than the former timescale, at least by assumption.  However, this need not be the case.&lt;/p&gt;
 &lt;p&gt;When this timescale (influenced by most parameters: population size, mutation size relative to competition kernel; resource kernel matters more weakly[ref] should add the equations for approximating the coexistence time to illustrate this[/ref])  becomes on the same order as the evolutionary timescale of waiting until the next mutation (determined by the mutation rate and population size) suddenly it impacts the waiting time until branching.&lt;/p&gt;
 &lt;p&gt;This can be characterized by the number of times a dimorphism establishes but then fails.  Similarly, weak coexistence impacts the number of times the dimorphism survives long enough for the mutation to arrive and establish, only to again collapse.&lt;/p&gt;
@@ -132,7 +132,7 @@
 &lt;p&gt;Unfortunately the analytic approximation seems insufficient:&lt;/p&gt;
 &lt;p&gt;[flickr-gallery mode =“tag” tags=“contour_analytics_vs_simulation”]&lt;/p&gt;
 &lt;h2 id=&quot;phases-of-the-branching-process&quot;&gt;Phases of the branching Process&lt;/h2&gt;
-&lt;p&gt;ensemble_sim() runs the full simulation with mutations.  Returns an ad_ensemble object with three elements: &lt;span class=&quot;math&quot;&gt;\(data, \)&lt;/span&gt;pars, and &lt;span class=&quot;math&quot;&gt;\(reps.  \)&lt;/span&gt;data is a list element for each replicate.  For each replicate, it records 4 time-points:&lt;/p&gt;
+&lt;p&gt;ensemble_sim() runs the full simulation with mutations.  Returns an ad_ensemble object with three elements: $data, $pars, and $reps.  $data is a list element for each replicate.  For each replicate, it records 4 time-points:&lt;/p&gt;
 &lt;ol type=&quot;1&quot;&gt;
 &lt;li&gt;&lt;p&gt;First time two coexisting branches are established&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Last (most recent) time two coexisting branches were established&lt;/p&gt;&lt;/li&gt;
@@ -546,13 +546,13 @@ This sentence cites the work in [bibcite key=Boettiger2010]
    <updated>2010-12-06T21:24:00+00:00</updated>
    <id>/12/06/follow-up-from-fri-discussions-revisiting-post-predictive-evaluation</id>
    <content type="html">&lt;p&gt;A few weeks ago, a seminar prompted me to take a closer look at a particular post-predictive evaluation technique applied reasonably often in our recent literature,&lt;a href=&quot;http://www.carlboettiger.info/archives/299&quot;&gt;see earlier entry&lt;/a&gt;.  I think by phrasing the approach more concisely and precisely it will be clear what the difficulty is.&lt;/p&gt;
-&lt;p&gt;As usual, we consider some data $ X$ and a set of $ N$ models specified by parameters, $ &lt;em&gt;1, &lt;/em&gt;2, _N$, then we can express the likelihood of the model as the probability of the data under the given model and parameter values:&lt;/p&gt;
+&lt;p&gt;As usual, we consider some data $ X$ and a set of $ N$ models specified by parameters, $ _1, _2, _N$, then we can express the likelihood of the model as the probability of the data under the given model and parameter values:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ L(\vec \theta_i) = P(\vec X|\vec \theta_i) \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;From this object we could take a Bayesian approach, but we will simply maximize the likelihood through appropriate choice of $ theta_i$ for each model $ i $.  Now we might compare these models by an information criterion applied to the likelihood estimates, or more completely by the Monte Carlo approach I’ve been working on in these pages.  Instead of these standard approaches though, we look in this entry at this post-predictive evaluation idea.&lt;/p&gt;
 &lt;p&gt;Post-predictive evaluation does the following.  Imagine we can compute some statistic on the data[ref] I drop the explicit vector notation for simplicity[/ref], &lt;span class=&quot;math&quot;&gt;\[ \mu = f(X)\]&lt;/span&gt;.  We may imagine this statistic as a scalar (such as the mean), though this is not strictly necessary.  Having fit our models to maximize &lt;span class=&quot;math&quot;&gt;\[ P(X|\theta) \]&lt;/span&gt;, we could compare the probabilities of observing this statistic under the model, &lt;span class=&quot;math&quot;&gt;\[ P(f(X) | \theta) \]&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Now it is patently obvious that maximizing $ P(X|) $ will generally be different than maximizing $ P(f(X) | )&lt;span class=&quot;math&quot;&gt;\(, so that the most likely model need not be the best performing under the statistic.  Does that give us any reason to suspect that having fit the models by maximum likelihood, the one with the maximum probability of recovering this statistic is the best? [ref] Maximizing goes for the mode of  \)&lt;/span&gt; P(f(X)|)&lt;span class=&quot;math&quot;&gt;\(, we might also compare the observed \)&lt;/span&gt; f(X)$ to the expected value, $ E(P(f(X)|) ) $ (mean instead of mode).  [/ref]&lt;/p&gt;
+&lt;p&gt;Now it is patently obvious that maximizing $ P(X|) $ will generally be different than maximizing $ P(f(X) | )$, so that the most likely model need not be the best performing under the statistic.  Does that give us any reason to suspect that having fit the models by maximum likelihood, the one with the maximum probability of recovering this statistic is the best? [ref] Maximizing goes for the mode of  $ P(f(X)|)$, we might also compare the observed $ f(X)$ to the expected value, $ E(P(f(X)|) ) $ (mean instead of mode).  [/ref]&lt;/p&gt;
 &lt;p&gt;Certainly not.  There is no reason why recovering this particular statistic should be considered more important than recovering the entire data, nor any reason to believe that performance in one is a good proxy for performance in the other.  Trivial counter-examples of models who recover the statistic well but do not match the data are easy.  As are overfit models that do well on both.  [ref] Note that in a likelihood approach, overfitting doesn’t have the same notion as as it does in least-squares or other regression fitting, since it must explicitly specify the probability.  That means that the expectation need not do well even when the model is very overfit.  [/ref]&lt;/p&gt;
-&lt;p&gt;Despite this, it is a very interesting question to turn on its head.  I was somewhat disappointed a few weeks ago when in doing the calculation for a simple example I realized that maximizing $ P(f(x) | )$ gave almost the same parameter estimates for $ P(X | )&lt;span class=&quot;math&quot;&gt;\(.  It was only in sitting in Monte Carlo discussion Friday with Bruce Rannala, Brian Moore and a few students that I realized the significance of this calculation.  Where \)&lt;/span&gt; f(x) =N$ number of species represented, a large disparity between these would indicate that the phylogeny was quite informative.  For the quantities to be very similar indicates that the information comes almost entirely simply from the number of data points.  This is quite worrying in a paradigm where we spend great effort making sure the phylogeny is estimated accurately and less effort making sure it is sampled completely.&lt;/p&gt;
+&lt;p&gt;Despite this, it is a very interesting question to turn on its head.  I was somewhat disappointed a few weeks ago when in doing the calculation for a simple example I realized that maximizing $ P(f(x) | )$ gave almost the same parameter estimates for $ P(X | )$.  It was only in sitting in Monte Carlo discussion Friday with Bruce Rannala, Brian Moore and a few students that I realized the significance of this calculation.  Where $ f(x) =N$ number of species represented, a large disparity between these would indicate that the phylogeny was quite informative.  For the quantities to be very similar indicates that the information comes almost entirely simply from the number of data points.  This is quite worrying in a paradigm where we spend great effort making sure the phylogeny is estimated accurately and less effort making sure it is sampled completely.&lt;/p&gt;
 &lt;h2 id=&quot;where-to&quot;&gt;Where to?&lt;/h2&gt;
 &lt;p&gt;I think it worth developing both of these lines of thought a little further:&lt;/p&gt;
 &lt;ul&gt;
@@ -614,7 +614,7 @@ This sentence cites the work in [bibcite key=Boettiger2010]
 &lt;li&gt;&lt;p&gt;policies and provisions for re-use, re-distribution, and the production of derivatives; and&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;plans for archiving data, samples, and other research products, and for preservation of access to them.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Data management requirements and plans specific to the Directorate, Office, Division, Program, or other NSF unit, relevant to a proposal are available at: &lt;a href=&quot;http://www.nsf.gov/bfa/dias/policy/dmp.jsp&quot;&gt;http://www.nsf.gov/bfa/dias/policy/dmp.jsp&lt;/a&gt;. If guidance specific to the program is not available, then the requirements established in this section apply. [….] The Data Management Plan will be reviewed as an integral part of the proposal, coming under Intellectual Merit or Broader Impacts or both, as appropriate for the scientific community of relevance.&lt;/p&gt;
+&lt;p&gt;Data management requirements and plans specific to the Directorate, Office, Division, Program, or other NSF unit, relevant to a proposal are available at: &lt;a href=&quot;http://www.nsf.gov/bfa/dias/policy/dmp.jsp&quot; class=&quot;uri&quot;&gt;http://www.nsf.gov/bfa/dias/policy/dmp.jsp&lt;/a&gt;. If guidance specific to the program is not available, then the requirements established in this section apply. [….] The Data Management Plan will be reviewed as an integral part of the proposal, coming under Intellectual Merit or Broader Impacts or both, as appropriate for the scientific community of relevance.&lt;/p&gt;
 &lt;h2 id=&quot;what-are-the-new-requirements-being-set-by-journals&quot;&gt;What are the new requirements being set by journals?&lt;/h2&gt;
 &lt;p&gt;The American Naturalist&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;This journal requires, as a condition for publication, that data supporting the results in the paper should be archived in an appropriate public archive, such as GenBank, TreeBASE, Dryad, or the Knowledge Network for Biocomplexity. Data are important products of the scientific enterprise, and they should be preserved and usable for decades in the future. Authors may elect to have the data publicly available at time of publication, or, if the technology of the archive allows, may opt to embargo access to the data for a period up to a year after publication. Exceptions may be granted at the discretion of the editor, especially for sensitive information such as human subject data or the location of endangered species.&lt;/em&gt;&lt;/p&gt;
@@ -893,7 +893,7 @@ $message
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[dX = \left( r - (x-\theta)^2\right)dt + \beta \sqrt{X} dB_t \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;and the linear noise approximation gives a linear Fokker Planck equation such that the probability distribution is Gaussian with moments ((corrected from yesterday to scale noise, basically as pure-birth Poisson process))&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[\frac{d \hat{x}}{dt} &amp;amp;= r - (\hat{x}-\theta)^2 \]&lt;/span&gt; &lt;span class=&quot;math&quot;&gt;\[ \frac{d \sigma^2}{dt} &amp;amp;= -2 (\hat x - \theta )\sigma^2 + \beta \left(r - (\hat{x}-\theta)^2 \right)   \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;So we can evaluate the probability density of being at $ x_t$ at time &lt;em&gt;t&lt;/em&gt; given that we started at &lt;em&gt;x&lt;/em&gt;0_ at time 0 by integrating the above equations (numerically, in this case, as we lack a closed form solution for the above).&lt;/p&gt;
+&lt;p&gt;So we can evaluate the probability density of being at $ x_t$ at time &lt;em&gt;t&lt;/em&gt; given that we started at &lt;em&gt;x_0&lt;/em&gt; at time 0 by integrating the above equations (numerically, in this case, as we lack a closed form solution for the above).&lt;/p&gt;
 &lt;p&gt;Being able to calculate this probability we can easily calculate likelihood of the timeseries under the model. We code this in R (&lt;a href=&quot;https://github.com/cboettig/structured-populations/commit/59a712f2ca7527ccd33ecd272729d29df7cac3d7#diff-0&quot;&gt;likelihood_bifur_models.R&lt;/a&gt;) and write a quick example script (also in repo as &lt;a href=&quot;https://github.com/cboettig/structured-populations/commit/59a712f2ca7527ccd33ecd272729d29df7cac3d7#diff-1&quot;&gt;bifur_likelihood_ex.R&lt;/a&gt;):&lt;/p&gt;
 &lt;pre class=&quot;sourceCode r&quot;&gt;&lt;code class=&quot;sourceCode r&quot;&gt;
 pars =&lt;span class=&quot;st&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kw&quot;&gt;c&lt;/span&gt;(&lt;span class=&quot;dt&quot;&gt;r=&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;10&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;theta=&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;dt&quot;&gt;beta=&lt;/span&gt;&lt;span class=&quot;dv&quot;&gt;1&lt;/span&gt;)
@@ -988,7 +988,7 @@ gitcom &amp;lt;-&lt;span class=&quot;st&quot;&gt; &lt;/span&gt;&lt;span class=&q
 	 <link href="/2010/11/22/power-in-simple-tests.html"/>
    <updated>2010-11-22T08:00:33+00:00</updated>
    <id>/11/22/power-in-simple-tests</id>
-   <content type="html">&lt;p&gt;Exploring power in simple tree models. With the smaller tree from the &lt;em&gt;geospiza &lt;/em&gt;dataset, (14 tips, left) is less than yesterday’s in the &lt;em&gt;bimaculus Anoles&lt;/em&gt; (with 23 tips, right)&lt;/p&gt;
+   <content type="html">&lt;p&gt;Exploring power in simple tree models. With the smaller tree from the _geospiza _dataset, (14 tips, left) is less than yesterday’s in the &lt;em&gt;bimaculus Anoles&lt;/em&gt; (with 23 tips, right)&lt;/p&gt;
 &lt;figure&gt;
 &lt;img src=&quot;http://farm5.staticflickr.com/4086/5196757723_3c7540af8e_o.png&quot; /&gt;
 &lt;/figure&gt;
@@ -1273,7 +1273,7 @@ system(&amp;#39;hpc-autotweets &amp;quot;Simulation complete, results here: http
 &lt;p&gt; = (- ) ^2 ++ &lt;/p&gt;
 &lt;p&gt;Excellent.  So the probability of N species after time t is given by a Gaussian with mean $ N_0 e^{(-)t} $ and variance&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \frac{\lambda+\mu}{\lambda-\mu} \left(e^{\alpha t} - 1\right) + N_0 e^{\alpha t}/\alpha - \gamma \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;So we’re interested in the likelihood, i.e. the probability of $ P(| N) &lt;span class=&quot;math&quot;&gt;\(, for simplicity let \)&lt;/span&gt; = 0$ for the moment.  The expected value is just $ N = N_0 e^{t} $ so that $ = (N/N_0)/t &lt;span class=&quot;math&quot;&gt;\(.  Meanwhile, the maximum likelihood estimator for \)&lt;/span&gt;$ is the maximum of the above expression.  We can calculate this analytically in closed form,(help from wxmaxima).&lt;/p&gt;
+&lt;p&gt;So we’re interested in the likelihood, i.e. the probability of $ P(| N) $, for simplicity let $ = 0$ for the moment.  The expected value is just $ N = N_0 e^{t} $ so that $ = (N/N_0)/t $.  Meanwhile, the maximum likelihood estimator for $$ is the maximum of the above expression.  We can calculate this analytically in closed form,(help from wxmaxima).&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \hat \lambda = \log\left( \frac{\sqrt{4 N_o^4-8 N_0^3N+ 4N_0^2N^2+1}}{2N_0^2}-\frac{1}{2N_0^2} +1\right)/t \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Which can be rewritten in terms of $ N/N_0$.&lt;/p&gt;
 &lt;figure&gt;
@@ -1284,7 +1284,7 @@ system(&amp;#39;hpc-autotweets &amp;quot;Simulation complete, results here: http
 &lt;/figure&gt;
 &lt;p&gt;Observe that this maximum likelihood value is strictly less than the expected value, i.e. solving in case $ N_0 = 1$  (need to clean chalkboard!)&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \frac{\log\left( \frac{\sqrt{4\,{N}^{2}-8\,N+5}}{2}+\frac{1}{2}\right) }{t} \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Also note though that the expected and maximum likelihood estimates agree in the reasonable limit $ N N_0&lt;span class=&quot;math&quot;&gt;\(.  The analytics are presumably closed form but far less tractable with \)&lt;/span&gt; $ 0$. Will need to explore the extent of this possible disagreement further later…  Also have some exploratory code on this in rabosky_test.R in github.&lt;/p&gt;
+&lt;p&gt;Also note though that the expected and maximum likelihood estimates agree in the reasonable limit $ N N_0$.  The analytics are presumably closed form but far less tractable with $ $ 0$. Will need to explore the extent of this possible disagreement further later…  Also have some exploratory code on this in rabosky_test.R in github.&lt;/p&gt;
 &lt;h3 id=&quot;generalizing-the-codebase&quot;&gt;Generalizing the Codebase&lt;/h3&gt;
 &lt;p&gt;Currently have focused on models fitted through the OUCH software.  The format of the power_between_models function in &lt;a href=&quot;https://github.com/cboettig/Comparative-Phylogenetics/blob/ca68cfe595cc947eecd5c46beeabb2df190123ed/R/powertest.R&quot;&gt;powertest.R&lt;/a&gt; fails to generalize immediately only because ouch fits are proper fit objects that have methods like simulate and update already associated with them, and store their likelihood value in the S4 class format under object@loglik.  If the fits from geiger, etc, were modified to recognize the standard general methods, they’d work just as well in this routine.  Should certainly look into generalizing them, as it would be interesting to start applying the Monte Carlo approach to more methods.&lt;/p&gt;
 &lt;h3 id=&quot;back-to-likelihood-paper&quot;&gt;Back to Likelihood paper…&lt;/h3&gt;
@@ -1371,7 +1371,7 @@ system(&amp;#39;hpc-autotweets &amp;quot;Simulation complete, results here: http
 &lt;p&gt;and note also that if this were &lt;span class=&quot;math&quot;&gt;\[ dX_1 = B_1 d B_1 \]&lt;/span&gt;  this would be a classic exercise in intro SDEs we can look up in Oksendal,&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \int_0^t B_s dB_s = \frac{1}{2}B_t^2 - \frac{1}{2}t \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Which can be shown either from the definition or from the Ito formula applied to the map $ g(x) = x^2 $, see beginning of Ch. 4 in my Oksendal.  Will have to try this out on my problem later.&lt;/p&gt;
-&lt;p&gt;A couple notes on the spectral analysis.  First should be some interesting-to-a-mathematician claims about convergence of these integrals on $  &lt;span class=&quot;math&quot;&gt;\(, and some central-limit like result on finite time domain. Second, make sure I simulate sample paths vs simulating just the distribution accurately.  Third, take an approach from the correlation function, clear that variance is largest at the low frequencies where there&amp;#39;s less data, and this at least can be treated analytically by considering the new stochastic process \)&lt;/span&gt; X_t X_s $ and arguing for stationarity and solving the correlation function.  Anyway, exercises to return to after I get more writing done.&lt;/p&gt;
+&lt;p&gt;A couple notes on the spectral analysis.  First should be some interesting-to-a-mathematician claims about convergence of these integrals on $  $, and some central-limit like result on finite time domain. Second, make sure I simulate sample paths vs simulating just the distribution accurately.  Third, take an approach from the correlation function, clear that variance is largest at the low frequencies where there’s less data, and this at least can be treated analytically by considering the new stochastic process $ X_t X_s $ and arguing for stationarity and solving the correlation function.  Anyway, exercises to return to after I get more writing done.&lt;/p&gt;
 &lt;h3 id=&quot;phylogenetics-figures-power-examples&quot;&gt;Phylogenetics Figures, Power examples&lt;/h3&gt;
 &lt;p&gt;Working on revising this stuff today.&lt;/p&gt;
 &lt;h3 id=&quot;rabosky-seminar&quot;&gt;Rabosky Seminar&lt;/h3&gt;
@@ -1520,9 +1520,9 @@ system(&amp;#39;hpc-autotweets &amp;quot;Simulation complete, results here: http
 &lt;p&gt;We evaluate the correlation function of their Fourier transform (note $ x () $ is really $ x()$, the new transformed variable, I’ve dropped the tilde only out of laziness):&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \langle x(\omega) x(\omega&amp;#39;) \rangle = \langle \int dt e^{i\omega t} x(t) \int dt&amp;#39; e^{i\omega&amp;#39; t&amp;#39;} x(t&amp;#39;) \rangle \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Bringing the expectation inside (by linearity) &lt;span class=&quot;math&quot;&gt;\[ \int dt \int dt&amp;#39; e^{i(\omega t+\omega&amp;#39; t&amp;#39;)}  \langle x(t)  x(t&amp;#39;) \rangle \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Defining $ = t-t’&lt;span class=&quot;math&quot;&gt;\(, using the definition of the correlation function we have \)&lt;/span&gt;$ dt e^{i (+‘) t’} d e^{-i ’ } C() $$&lt;/p&gt;
+&lt;p&gt;Defining $ = t-t’$, using the definition of the correlation function we have &lt;span class=&quot;math&quot;&gt;\[ \int dt e^{i (\omega+\omega&amp;#39;) t&amp;#39;} \int d \tau e^{-i \omega&amp;#39; \tau} C(\tau) \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;And we see that the $ t $ integral is the (two pi times the) delta function, hence&lt;span class=&quot;math&quot;&gt;\[ \langle x(\omega) x(\omega&amp;#39;) \rangle = 2 \pi  \delta (\omega + \omega&amp;#39;) \int d \tau e^{i \omega \tau}  C(\tau) \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Note that in the last step we use the fact that delta fn is zero except where $ = -’&lt;span class=&quot;math&quot;&gt;\(, and we _define_ this last integral as the Power spectrum, \)&lt;/span&gt; S()&lt;span class=&quot;math&quot;&gt;\(.   Noting that as it is complex, \)&lt;/span&gt; x(-) = x(^*) $, so&lt;/p&gt;
+&lt;p&gt;Note that in the last step we use the fact that delta fn is zero except where $ = -’$, and we &lt;em&gt;define&lt;/em&gt; this last integral as the Power spectrum, $ S()$.   Noting that as it is complex, $ x(-) = x(^*) $, so&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \langle x(\omega) x^*(\omega&amp;#39; ) \rangle = 2\pi  \delta(\omega -\omega&amp;#39;) S(\omega) \]&lt;/span&gt;,&lt;/p&gt;
 &lt;p&gt;or at $ = -$, we have as claimed:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ \langle x(\omega) x^*(\omega) \rangle = 2\pi S(\omega) \]&lt;/span&gt;.&lt;/p&gt;
@@ -1668,7 +1668,7 @@ E( X_t^2 Z_t^2 (1-\rho^2) ) \end{multline}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ dX_t = \alpha \left(\theta_t - X_t\right) dt + \sigma_t dW_t \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;and&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[ dX_t = \alpha_t (\theta_t - X_t) dt + \sigma_t dW_t \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;Where changing stability is characterized by critical slowing down seen in decreasing $ &lt;span class=&quot;math&quot;&gt;\(.  Unfortunately, a general parameterization for the other parameters which will change in both models is challenging, (see the end of yesterday&amp;#39;s notes) and without a good fit to these it may be difficult to attribute the model choice to sensitivity in \)&lt;/span&gt; $. Without the ability to frame reliable models to capture the process, we must be careful to compare them. Different mechanisms driving the bifurcation can create substantially different pictures that may not be well caught by the same parameterization of the above model.&lt;/p&gt;
+&lt;p&gt;Where changing stability is characterized by critical slowing down seen in decreasing $ $. Unfortunately, a general parameterization for the other parameters which will change in both models is challenging, (see the end of yesterday’s notes) and without a good fit to these it may be difficult to attribute the model choice to sensitivity in $ $. Without the ability to frame reliable models to capture the process, we must be careful to compare them. Different mechanisms driving the bifurcation can create substantially different pictures that may not be well caught by the same parameterization of the above model.&lt;/p&gt;
 &lt;h3 id=&quot;so-where-next&quot;&gt;So where next?&lt;/h3&gt;
 &lt;p&gt;Ultimately, it is still necessary to quantify the probability of detection of a warning signal in the simplest, best-case scenario of the data observed from a system known to exhibit a saddle-node bifurcation. That is, we still want to compare a model involving the change with one not involving the change, and quantify the information necessary (sensitivity to rate of change, amount of data, etc – all issues of power) to distinguish between them. Instead of building this around the SDE above, we can build this around a transformation of the data that does not exhibit this sensitivity to the model details. Solving for the time-dependent spectral density seems a promising way to go, avoiding many of the issues highlighted in yesterday’s notes.&lt;/p&gt;
 </content>
@@ -1687,10 +1687,8 @@ E( X_t^2 Z_t^2 (1-\rho^2) ) \end{multline}\]&lt;/span&gt;&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;With changing mean:&lt;/p&gt;
 &lt;embed src=&quot;http://www.carlboettiger.info/assets/files/bifur.swf&quot; width=300 height=300&gt;
-
 &lt;p&gt;With “constant” mean:&lt;/p&gt;
 &lt;embed src=&quot;http://www.carlboettiger.info/assets/files/bifur_mean_const.swf&quot; width=300 height=300&gt;
-
 &lt;p&gt;Note that the mean changes quite suddenly at the end, though the loss of stability is more pronounced much earlier on.  (Images are is now sfw-flash objects instead of gif loops so can be paused, etc by right click. Hosted locally in this site’s media library as flickr stream doesn’t support flash.)&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://github.com/cboettig/structured-populations/blob/39a295ae0e3bde82af6800f8cf87f61f74726979/demos/saddle_analytics.R&quot;&gt;Code archive for these figures;&lt;/a&gt; uses the animation package and SWF tools to create the flash images.  Multiple root finding (a problem in the numerical examples earlier which used nlm) supported now by rootSolve package.&lt;/p&gt;
 &lt;h3 id=&quot;so-what-does-this-mean&quot;&gt;So what does this mean?&lt;/h3&gt;
@@ -1958,7 +1956,7 @@ E( X_t^2 Z_t^2 (1-\rho^2) ) \end{multline}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;On Tue, Oct 12, 2010 at 5:08 PM, Lara Poplarski &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#108;&amp;#x61;&amp;#114;&amp;#x61;&amp;#112;&amp;#x6f;&amp;#112;&amp;#108;&amp;#x61;&amp;#114;&amp;#x73;&amp;#x6b;&amp;#x69;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#108;&amp;#x61;&amp;#114;&amp;#x61;&amp;#112;&amp;#x6f;&amp;#112;&amp;#108;&amp;#x61;&amp;#114;&amp;#x73;&amp;#x6b;&amp;#x69;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; wrote:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   Dear List,
@@ -2134,7 +2132,7 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
 &lt;/ul&gt;
 &lt;h4 id=&quot;resources-for-abc-bayesian-inference-in-ecological-and-spatial-context-workshop&quot;&gt;Resources for ABC / Bayesian inference in ecological and spatial context workshop&lt;/h4&gt;
 &lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;Sisson Sa, Fan Y, Tanaka MM. Sequential Monte Carlo without likelihoods. Proceedings of the National Academy of Sciences of the United States of America. 2007;104(6):1760-5. Available at: &lt;a href=&quot;http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1794282&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract&quot; title=&quot;http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1794282&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract&quot;&gt;http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1794282&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Sisson Sa, Fan Y, Tanaka MM. Sequential Monte Carlo without likelihoods. Proceedings of the National Academy of Sciences of the United States of America. 2007;104(6):1760-5. Available at: &lt;a href=&quot;http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1794282&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract&quot; class=&quot;uri&quot; title=&quot;http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1794282&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract&quot;&gt;http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=1794282&amp;amp;tool=pmcentrez&amp;amp;rendertype=abstract&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;de Valpine P, Hastings A. Fitting Population Models Incorporating Process Noise and Observation Error. Ecological Monographs. 2002;72(1):57-76. Available at: &lt;a href=&quot;http://www.esajournals.org/doi/abs/10.1890/0012-9615%282002%29072%5B0057%3AFPMIPN%5D2.0.CO%3B2&quot; title=&quot;http://www.esajournals.org/doi/abs/10.1890/0012-9615%282002%29072%5B0057%3AFPMIPN%5D2.0.CO%3B2&quot;&gt;http://www.esajournals.org/doi/abs/10.1890/0012-9615%282002%29072%5B0057%3AFPMIPN%5D2.0.CO%3B2&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Bolker B. Ecological Models and Data in R. Princeton and Oxford: Princeton University Press; 2007.&lt;/li&gt;
 &lt;/ol&gt;
@@ -2237,9 +2235,9 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
    <id>/09/10/Meeting-with-Alan</id>
    <content type="html">&lt;h3 id=&quot;some-discussion-of-references&quot;&gt;Some discussion of references&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;﻿ Ovaskainen O, Meerson B. Stochastic models of population extinction. Trends in Ecology &amp;amp; Evolution. 2010;(Box 3):1-10. Available at: &lt;a href=&quot;http://dx.doi.org/10.1016/j.tree.2010.07.009&quot; title=&quot;http://dx.doi.org/10.1016/j.tree.2010.07.009&quot;&gt;http://dx.doi.org/10.1016/j.tree.2010.07.009&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;﻿ Ovaskainen O, Meerson B. Stochastic models of population extinction. Trends in Ecology &amp;amp; Evolution. 2010;(Box 3):1-10. Available at: &lt;a href=&quot;http://dx.doi.org/10.1016/j.tree.2010.07.009&quot; class=&quot;uri&quot; title=&quot;http://dx.doi.org/10.1016/j.tree.2010.07.009&quot;&gt;http://dx.doi.org/10.1016/j.tree.2010.07.009&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;﻿* Goel NS, Richter-Dyn N. Stochastic Models in Biology. The Blackburn Press; 2004:269. Available at: &lt;a href=&quot;http://www.amazon.com/Stochastic-Models-Biology-Narendra-Goel/dp/193066592X&quot; title=&quot;http://www.amazon.com/Stochastic-Models-Biology-Narendra-Goel/dp/193066592X&quot;&gt;http://www.amazon.com/Stochastic-Models-Biology-Narendra-Goel/dp/193066592X&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;﻿* Goel NS, Richter-Dyn N. Stochastic Models in Biology. The Blackburn Press; 2004:269. Available at: &lt;a href=&quot;http://www.amazon.com/Stochastic-Models-Biology-Narendra-Goel/dp/193066592X&quot; class=&quot;uri&quot; title=&quot;http://www.amazon.com/Stochastic-Models-Biology-Narendra-Goel/dp/193066592X&quot;&gt;http://www.amazon.com/Stochastic-Models-Biology-Narendra-Goel/dp/193066592X&lt;/a&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Bjørnstad O, Finkenstädt B, BT. Dynamics of measles epidemics: estimating scaling of transmission rates using a time series SIR model. Ecological Monographs. 2002;72(2):169-184. Available at: &lt;a href=&quot;http://www.esajournals.org/doi/pdf/10.1890/0012-9615(2002)072%5B0169%3ADOMEES%5D2.0.CO%3B2&quot; title=&quot;http://www.esajournals.org/doi/pdf/10.1890/0012-9615(2002)072%5B0169%3ADOMEES%5D2.0.CO%3B2&quot;&gt;http://www.esajournals.org/doi/pdf/10.1890/0012-9615(2002)072%5B0169%3ADOMEES%5D2.0.CO%3B2&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;Grenfell BT, Bjørnstad ON, Finkenstädt BF. Dynamics of measles epidemics: scaling noise, determinism, and predictability with the TSIR model. Ecological Monographs. 2002;72(2):185-202. Available at: &lt;a href=&quot;http://www.esajournals.org/doi/pdf/10.1890/0012-9615(2002)072%5B0185%3ADOMESN%5D2.0.CO%3B2&quot; title=&quot;http://www.esajournals.org/doi/pdf/10.1890/0012-9615(2002)072%5B0185%3ADOMESN%5D2.0.CO%3B2&quot;&gt;http://www.esajournals.org/doi/pdf/10.1890/0012-9615(2002)072%5B0185%3ADOMESN%5D2.0.CO%3B2&lt;/a&gt;.&lt;/li&gt;
@@ -2615,7 +2613,7 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
 &lt;p&gt;&lt;br /&gt; #### some more comments&lt;/p&gt;
 &lt;p&gt;-So, Butler and King choose your OU.3 out of their five models? And where do you end up? There is a bit of resolution lacking, here.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt; -Do you check to see if the empirical likelihood distributions are relatively stable? (e.g. simulating more isn’t changing them much)&lt;/p&gt;
-&lt;p&gt;&lt;br /&gt; -We really ought to find this talked about in the statistical literature. The test of the sort we are talking about is proposed in Cox, “Tests of Separate Families of Hypotheses”, &lt;a href=&quot;http://projecteuclid.org/euclid.bsmsp/1200512162&quot; title=&quot;http://projecteuclid.org/euclid.bsmsp/1200512162&quot;&gt;http://projecteuclid.org/euclid.bsmsp/1200512162&lt;/a&gt; equation (48). Except this does not involve bootstrapping; this has probably been dealt with in the literature. They seem to do this in high-energy physics: &lt;a href=&quot;http://www.springerlink.com/content/q02303062221314n/&quot; title=&quot;http://www.springerlink.com/content/q02303062221314n/&quot;&gt;http://www.springerlink.com/content/q02303062221314n/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt; -We really ought to find this talked about in the statistical literature. The test of the sort we are talking about is proposed in Cox, “Tests of Separate Families of Hypotheses”, &lt;a href=&quot;http://projecteuclid.org/euclid.bsmsp/1200512162&quot; class=&quot;uri&quot; title=&quot;http://projecteuclid.org/euclid.bsmsp/1200512162&quot;&gt;http://projecteuclid.org/euclid.bsmsp/1200512162&lt;/a&gt; equation (48). Except this does not involve bootstrapping; this has probably been dealt with in the literature. They seem to do this in high-energy physics: &lt;a href=&quot;http://www.springerlink.com/content/q02303062221314n/&quot; class=&quot;uri&quot; title=&quot;http://www.springerlink.com/content/q02303062221314n/&quot;&gt;http://www.springerlink.com/content/q02303062221314n/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt; . 2: “correlation typically strongest under a BM model” — really?&lt;/p&gt;
 &lt;p&gt;. 4: Not clear why if “The sample points are then statistically independent and the method of phylogenetically independent contrasts will be positively misleading.”&lt;/p&gt;
 &lt;p&gt;in general: the processes generally only “reach” the stationary distribution colloquially – to be correct, they “approach” it.&lt;/p&gt;
@@ -2643,7 +2641,6 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
 &lt;li&gt;parallelization is giving strange errors&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; Error in checkForRemoteErrors(val) : 
  one node produced an error: Starting of snow cluster failed! Error in socketConnection(port = port, server = TRUE, blocking = TRUE,   
  cannot open the connection&lt;/code&gt;&lt;/pre&gt;
@@ -2764,7 +2761,6 @@ minimum detectable alpha is 2&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;fit2 , the linear change rate model, converges fine using Nelder-Meade (using 1e12 ~ inf likelihood return when attempting negative alpha or sigma), but throws hard errors for L-BFGS-B:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; Error in optim(pars, warning.likfn, method = method, lower = lower) : 
  non-finite finite-difference value [3]&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
@@ -3747,7 +3743,6 @@ names(fin_angle) &amp;lt;- labrid_data[,1]
 &lt;li&gt;Current profiling table:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; %   cumulative   self              self     total           
 time   seconds   seconds    calls  us/call  us/call  name    
 57.14      0.08     0.08  1604986     0.05     0.05  calc_gamma
@@ -4454,7 +4449,7 @@ time   seconds   seconds    calls  us/call  us/call  name
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;R-evolution parallelizes the variance dynamics calculation (perhaps the matrix multiplication step?) and is probably responsible for the openmp parallelization working.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://arxiv.org/abs/1005.2718#&quot; title=&quot;http://arxiv.org/abs/1005.2718#&quot;&gt;article&lt;/a&gt; on cloud computing vs grid. reminds me to include questions on cloud computing in the CSGF survey.&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Should also take a closer read of the recent: Kendall BE, Wittmann ME. A stochastic model for annual reproductive success. The American naturalist. 2010;175(4):461-8. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20163244&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20163244&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20163244&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Should also take a closer read of the recent: Kendall BE, Wittmann ME. A stochastic model for annual reproductive success. The American naturalist. 2010;175(4):461-8. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20163244&quot; class=&quot;uri&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20163244&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20163244&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 </content>
@@ -4526,11 +4521,12 @@ time   seconds   seconds    calls  us/call  us/call  name
 &lt;h2 id=&quot;reading&quot;&gt;Reading&lt;/h2&gt;
 &lt;p&gt;A couple good articles today, see Mendeley for details.&lt;/p&gt;
 &lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;&lt;p&gt;Goel AK, Vattam SS, Rugaber S, et al. Learning Functional and Causal Abstractions of Classroom Aquaria The SBF Theory of Understanding of Complex Systems ACT : Interactive Construction of SBF Models. In Review. 2010.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Goel AK, Vattam SS, Rugaber S, et al. Learning Functional and Causal Abstractions of Classroom Aquaria The SBF Theory of Understanding of Complex Systems ACT : Interactive Construction of SBF Models. In Review.&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Crutchfield JP, Whalen S. Structural Drift : The Population Dynamics of Sequential Learning. In review. 2010:1-14.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Raghib M, Hill Na, Dieckmann U. A multiscale maximum entropy moment closure for locally regulated space-time point process models of population dynamics. Journal of mathematical biology. 2010. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20446087&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20446087&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20446087&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Lindegren M, Möllmann C, Nielsen A, et al. Ecological forecasting under climate change: the case of Baltic cod. Proceedings. Biological sciences / The Royal Society. 2010. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20236982&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20236982&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20236982&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Berkley Ha, Kendall BE, Mitarai S, Siegel Da. Turbulent dispersal promotes species coexistence. Ecology Letters. 2010;13(3):360-371. Available at: &lt;a href=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01427.x&quot; title=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01427.x&quot;&gt;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01427.x&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Raghib M, Hill Na, Dieckmann U. A multiscale maximum entropy moment closure for locally regulated space-time point process models of population dynamics. Journal of mathematical biology. 2010. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20446087&quot; class=&quot;uri&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20446087&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20446087&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Lindegren M, Möllmann C, Nielsen A, et al. Ecological forecasting under climate change: the case of Baltic cod. Proceedings. Biological sciences / The Royal Society. 2010. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20236982&quot; class=&quot;uri&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20236982&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20236982&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Berkley Ha, Kendall BE, Mitarai S, Siegel Da. Turbulent dispersal promotes species coexistence. Ecology Letters. 2010;13(3):360-371. Available at: &lt;a href=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01427.x&quot; class=&quot;uri&quot; title=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01427.x&quot;&gt;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01427.x&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&quot;misc-code&quot;&gt;Misc Code&lt;/h2&gt;
 &lt;p&gt;Apparently R doesn’t have a convenient generalized eigenvalue solver (for case of a matrix on either side). Wrote quick interface to the gsl lapack routines. Github’s gists seem an ideal way to store and share such code snippets, so here it is embedded.&lt;/p&gt;
@@ -4684,28 +4680,28 @@ git merge regime_shifts # Merges that branch onto the current (master) branch&lt
 &lt;p&gt;commit 0b6ce3ea1210284b71f3ab270b1ad6532ee0f31b Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Tue May 18 23:54:45 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   added adult cannibalism on pupa&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 22c42eb726ddc6216932906953eea18dc165185f Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Tue May 18 15:59:51 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   getting second-order transitions implmented&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 2cb4215b1028619e96ec809875c693fb84fdc185 Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Tue May 18 15:22:24 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   replaced f and g with birth and death&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit c9bc00fbf7dcd3eabd1935d1df96adb7dd54480d Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Tue May 18 14:13:25 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   seperated examples from noise approx code&lt;/code&gt;&lt;/pre&gt;
@@ -4967,7 +4963,6 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
 &lt;li&gt;Lineage through time plots ape and laser:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; ltt.plot() or plotLtt()&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;Simulating trees (Yule and Birth/Death)&lt;/li&gt;
@@ -5075,7 +5070,6 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
 &lt;li&gt;Branches need to be pushed to the github server separately, see the &lt;a href=&quot;http://github.com/guides/push-a-branch-to-github&quot; title=&quot;http://github.com/guides/push-a-branch-to-github&quot;&gt;github directions&lt;/a&gt;, but essentially&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git push origin branchname&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;will do the trick.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt; #### Parameters for small class&lt;/p&gt;
@@ -5545,13 +5539,11 @@ plot_cts_ancestor(compare$phy, compare$data, out)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;Grab this repository using git:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git clone git://github.com/cboettig/sandbox.git&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;Revert to this edit’s version of code and data using git:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git checkout 77af6613db294ca068cf&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://github.com/downloads/cboettig/sandbox/sandbox_0.0-1.tar.gz&quot; title=&quot;http://github.com/downloads/cboettig/sandbox/sandbox_0.0-1.tar.gz&quot;&gt;Download&lt;/a&gt; the snapshot as an R package. More information on the &lt;a href=&quot;http://github.com/cboettig/sandbox/downloads&quot; title=&quot;http://github.com/cboettig/sandbox/downloads&quot;&gt;downloads page&lt;/a&gt; of repository.&lt;/p&gt;&lt;/li&gt;
@@ -5559,7 +5551,6 @@ plot_cts_ancestor(compare$phy, compare$data, out)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;p&gt;Updated git version using R package is:&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git checkout b1a90ad97b90d9cbeaa7&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 </content>
@@ -5817,7 +5808,7 @@ d(N) = &amp;amp; r \frac{\sum_yN(y,t)C(x,y)}{K(x)} .\label{general_logistic}\end
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[C(x,y)=e^{-(x-y)^2/(2\sigma_c^2)}, \label{C}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;where &lt;span class=&quot;math&quot;&gt;\(\sigma_k\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(\sigma_c\)&lt;/span&gt; are scale factors for the resource distribution and competition kernels respectively. &lt;span class=&quot;math&quot;&gt;\(\sigma_c\)&lt;/span&gt; can be though of as the niche size. We focus on the case &lt;span class=&quot;math&quot;&gt;\(\sigma_k&amp;gt;\sigma_c\)&lt;/span&gt;, for which the model has an evolutionary branching point at &lt;span class=&quot;math&quot;&gt;\(x=0\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The evolutionary dynamics are specified only at the phenotypic level: We assume that with probability &lt;span class=&quot;math&quot;&gt;\(\mu\)&lt;/span&gt; an individual birth results in a mutant offspring, and that the mutant trait is chosen from a Gaussian distribution centered at the trait value of the parents and with a variance &lt;span class=&quot;math&quot;&gt;\(\sigma_{\mu}^2\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Consider a population of two coexisting types, characterized by traits &lt;span class=&quot;math&quot;&gt;\(x_1\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(x_2\)&lt;/span&gt; respectively. The birth and death rates of each population are then given by expression  . We’ll assume that the populations can coexist, that is &lt;span class=&quot;math&quot;&gt;\((x_1, x_2)\)&lt;/span&gt; falls into the coexistence region &lt;span class=&quot;math&quot;&gt;\(P_2\)&lt;/span&gt;; &lt;em&gt;i.e.&lt;/em&gt; that &lt;span class=&quot;math&quot;&gt;\(C(x_1,x_2)K(x_2) /K_1(x_1) &amp;lt; 1 \)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(C(x_1, x_2) K(x_1)/K(x_2) &amp;lt; 1\)&lt;/span&gt;. This guarentees that each population has a positive expected growth rate when rare. However, because the population is composed of finitely many discrete individuals, there is still a chance that either type will be lost to chance; to demographic stochasticity. We whish to characterize the expected waiting time for such an event to occur.&lt;/p&gt;
+&lt;p&gt;Consider a population of two coexisting types, characterized by traits &lt;span class=&quot;math&quot;&gt;\(x_1\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(x_2\)&lt;/span&gt; respectively. The birth and death rates of each population are then given by expression  . We’ll assume that the populations can coexist, that is &lt;span class=&quot;math&quot;&gt;\((x_1, x_2)\)&lt;/span&gt; falls into the coexistence region &lt;span class=&quot;math&quot;&gt;\(P_2\)&lt;/span&gt;; &lt;em&gt;i.e.&lt;/em&gt; that $C(x_1,x_2)K(x_2) /K_1(x_1) &amp;lt; 1 $ and &lt;span class=&quot;math&quot;&gt;\(C(x_1, x_2) K(x_1)/K(x_2) &amp;lt; 1\)&lt;/span&gt;. This guarentees that each population has a positive expected growth rate when rare. However, because the population is composed of finitely many discrete individuals, there is still a chance that either type will be lost to chance; to demographic stochasticity. We whish to characterize the expected waiting time for such an event to occur.&lt;/p&gt;
 &lt;p&gt;To do so, we will switch first into density and then frequency, to obtain a one-dimensional expression we can solve exactly. We will then use the Arhennius approximation to obtain a closed form solution. First, we will replace the discrete number of individuals &lt;span class=&quot;math&quot;&gt;\(N\)&lt;/span&gt; with the macroscopic, continuous variable &lt;span class=&quot;math&quot;&gt;\(n\)&lt;/span&gt;, representing the mean &lt;em&gt;density&lt;/em&gt; of individuals; &lt;span class=&quot;math&quot;&gt;\(N/A\)&lt;/span&gt;, where &lt;span class=&quot;math&quot;&gt;\(A\)&lt;/span&gt; is the area in which &lt;span class=&quot;math&quot;&gt;\(N\)&lt;/span&gt; individuals are found. For suitably large &lt;span class=&quot;math&quot;&gt;\(A\)&lt;/span&gt;, we will be able to accurately describe &lt;span class=&quot;math&quot;&gt;\(n\)&lt;/span&gt; with a coupled stochastic differential equation for each population. By changing variables once more into the frequency of one type, &lt;span class=&quot;math&quot;&gt;\(p = n_1/(n_1+n_2)\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(n = n_1 + n_2\)&lt;/span&gt;, we are able to do a timescale seperation to focus on the dynamics in a single variable, &lt;span class=&quot;math&quot;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;The master equation that describes the probability of observing &lt;span class=&quot;math&quot;&gt;\(N_i\)&lt;/span&gt; individuals of type &lt;span class=&quot;math&quot;&gt;\(i\)&lt;/span&gt; is given by,&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[\begin{aligned}
@@ -5983,13 +5974,11 @@ plot_cts_ancestor(compare$phy, compare$data, out)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;Grab this repository using git:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git clone git://github.com/cboettig/sandbox.git&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;Revert to this edit’s version of code and data using git:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git checkout 77af6613db294ca068cf&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://github.com/downloads/cboettig/sandbox/sandbox_0.0-1.tar.gz&quot; title=&quot;http://github.com/downloads/cboettig/sandbox/sandbox_0.0-1.tar.gz&quot;&gt;Download&lt;/a&gt; the snapshot as an R package. More information on the &lt;a href=&quot;http://github.com/cboettig/sandbox/downloads&quot; title=&quot;http://github.com/cboettig/sandbox/downloads&quot;&gt;downloads page&lt;/a&gt; of repository.&lt;/p&gt;&lt;/li&gt;
@@ -5997,7 +5986,6 @@ plot_cts_ancestor(compare$phy, compare$data, out)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;p&gt;Updated git version using R package is:&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- --&gt;
-
 &lt;pre&gt;&lt;code&gt; git checkout b1a90ad97b90d9cbeaa7 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt; Meetings ——–&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://www.math.ualberta.ca/~mlewis/&quot; title=&quot;http://www.math.ualberta.ca/~mlewis/&quot;&gt;Mark Lewis&lt;/a&gt; visiting UC Davis:&lt;/p&gt;
@@ -6043,7 +6031,7 @@ plot_cts_ancestor(compare$phy, compare$data, out)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;Feedback&lt;/strong&gt; (using &lt;a href=&quot;http://phylogenetics.uservoice.com/forums/43843-general?lang=en&amp;amp;utm_campaign=Widgets&amp;amp;utm_content=tab-widget&amp;amp;utm_medium=widget&amp;amp;utm_source=phylogenetics.uservoice.com&quot; title=&quot;http://phylogenetics.uservoice.com/forums/43843-general?lang=en&amp;amp;utm_campaign=Widgets&amp;amp;utm_content=tab-widget&amp;amp;utm_medium=widget&amp;amp;utm_source=phylogenetics.uservoice.com&quot;&gt;uservoice&lt;/a&gt; and &lt;a href=&quot;http://stackoverflow.com/questions/2134583/looking-for-fast-algorithm-to-find-distance-between-two-nodes-in-binary-tree&quot; title=&quot;http://stackoverflow.com/questions/2134583/looking-for-fast-algorithm-to-find-distance-between-two-nodes-in-binary-tree&quot;&gt;stackoverflow&lt;/a&gt;): Before forums, asking a question meant knowing someone who knows the answer. Online tools make it possible to ask questions to particular expertise groups. Questions and replies can be tagged, linked, and searched; cites automatically search for existing similar questions. They can also be rated, drawing more focus to those with more value to the community, and contributions can be tracked and rewarded, while profiles help identify contributors and provide elements of a human network. This is also well adapted to feedback between users and developers.&lt;/p&gt;
 &lt;p&gt;I find this approach saves time as it integrates naturally into my workflow. It reduces errors through greater transparency and review. It increases quality through better access to expert advice and building on established work. It increases impact by connecting to other data and being amplified by other researchers in the network. The more researchers adopt these approaches, the more effective they’ll become.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt; ### Call For Lightning Talks&lt;/p&gt;
-&lt;p&gt;“Lightning talks are short presentations of 5 minutes. They are ideal for drawing the attention of the audience to new developments, tools, and resources, or to subsequent events where more in-depth information can be obtained. Please also see our FAQ for more information (&lt;a href=&quot;http://ievobio.org/faq.html#lightning&quot; title=&quot;http://ievobio.org/faq.html#lightning&quot;&gt;http://ievobio.org/faq.html#lightning&lt;/a&gt;). Lightning talks will be part of the more interactive afternoon program on both conference days.&lt;/p&gt;
+&lt;p&gt;“Lightning talks are short presentations of 5 minutes. They are ideal for drawing the attention of the audience to new developments, tools, and resources, or to subsequent events where more in-depth information can be obtained. Please also see our FAQ for more information (&lt;a href=&quot;http://ievobio.org/faq.html#lightning&quot; class=&quot;uri&quot; title=&quot;http://ievobio.org/faq.html#lightning&quot;&gt;http://ievobio.org/faq.html#lightning&lt;/a&gt;). Lightning talks will be part of the more interactive afternoon program on both conference days.&lt;/p&gt;
 &lt;p&gt;Submitted talks should be in the area of informatics aimed at advancing research in phylogenetics, evolution, and biodiversity, including new tools, cyberinfrastructure development, large-scale data analysis, and visualization.&lt;/p&gt;
 &lt;p&gt;Submissions consist of a title and an abstract at most 1 page long. The abstract should provide an overview of the talk’s subject. Reviewers will judge whether a submission is within scope of the conference (see above). If applicable, the abstract must also state the license and give the URL where the source code is available so reviewers can verify that the open-source requirement(*) is met.&amp;quot;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://ievobio.org/ocs/index.php/ievobio/2010/schedConf/cfp&quot; title=&quot;http://ievobio.org/ocs/index.php/ievobio/2010/schedConf/cfp&quot;&gt;From iEvoBio Conference&lt;/a&gt;.&lt;/p&gt;
@@ -6136,14 +6124,14 @@ plot_cts_ancestor(compare$phy, compare$data, out)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;cboettig@wiglaf:~/Documents/ucdavis/research/adaptiveDynamics/code/branchingtime$ git log commit da58a6eb079a8ff9c2c28a2e5e1c27fe484f43fc Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Fri Apr 23 13:05:30 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   random number seeds now set to avoid parallel cores running with same seed&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 6e5363559f602d1dd2e2f8addec0716e8a5c842a Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Fri Apr 23 11:46:42 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   solution for exporting .C call to parallel cores&lt;/code&gt;&lt;/pre&gt;
@@ -6239,12 +6227,10 @@ Date:   Thu Apr 22 13:03:03 2010 -0700
 &lt;/ul&gt;
 &lt;dl&gt;
 &lt;dt&gt;Phase 1&lt;/dt&gt;
-&lt;dd&gt;Completed when 2 branches exist over threshold
+&lt;dd&gt;Completed when 2 branches exist over threshold Phase 2
 &lt;/dd&gt;
-&lt;dt&gt;Phase 2&lt;/dt&gt;
-&lt;dd&gt;Completed when a third population has established over threshold exterior to a stable pair
+&lt;dd&gt;Completed when a third population has established over threshold exterior to a stable pair Phase 3
 &lt;/dd&gt;
-&lt;dt&gt;Phase 3&lt;/dt&gt;
 &lt;dd&gt;Completed when two populations over threshold are separated in traitspace by more than finishline units
 &lt;/dd&gt;
 &lt;/dl&gt;
@@ -6331,7 +6317,7 @@ d(N) = &amp;amp; r \frac{\sum_yN(y,t)C(x,y)}{K(x)} .\label{general_logistic}\end
 \label{pdf}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;and the expected time to complete phases 1 and 2 is &lt;span class=&quot;math&quot;&gt;\(\int_0^{\infty} T \Pi(T) \mathrm{d}T\)&lt;/span&gt;. This is our first analytic approximation.&lt;/p&gt;
 &lt;h2 id=&quot;coexistence&quot;&gt;Coexistence&lt;/h2&gt;
-&lt;p&gt;Consider a population of two coexisting types, characterized by traits &lt;span class=&quot;math&quot;&gt;\(x_1\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(x_2\)&lt;/span&gt; respectively. The birth and death rates of each population are then given by expression  . We’ll assume that the populations can coexist, that is &lt;span class=&quot;math&quot;&gt;\((x_1, x_2)\)&lt;/span&gt; falls into the coexistence region &lt;span class=&quot;math&quot;&gt;\(P_2\)&lt;/span&gt;; &lt;em&gt;i.e.&lt;/em&gt; that &lt;span class=&quot;math&quot;&gt;\(C(x_1,x_2)K(x_2) /K_1(x_1) &amp;lt; 1 \)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(C(x_1, x_2) K(x_1)/K(x_2) &amp;lt; 1\)&lt;/span&gt;. This guarentees that each population has a positive expected growth rate when rare. However, because the population is composed of finitely many discrete individuals, there is still a chance that either type will be lost to chance; to demographic stochasticity. We whish to characterize the expected waiting time for such an event to occur.&lt;/p&gt;
+&lt;p&gt;Consider a population of two coexisting types, characterized by traits &lt;span class=&quot;math&quot;&gt;\(x_1\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(x_2\)&lt;/span&gt; respectively. The birth and death rates of each population are then given by expression  . We’ll assume that the populations can coexist, that is &lt;span class=&quot;math&quot;&gt;\((x_1, x_2)\)&lt;/span&gt; falls into the coexistence region &lt;span class=&quot;math&quot;&gt;\(P_2\)&lt;/span&gt;; &lt;em&gt;i.e.&lt;/em&gt; that $C(x_1,x_2)K(x_2) /K_1(x_1) &amp;lt; 1 $ and &lt;span class=&quot;math&quot;&gt;\(C(x_1, x_2) K(x_1)/K(x_2) &amp;lt; 1\)&lt;/span&gt;. This guarentees that each population has a positive expected growth rate when rare. However, because the population is composed of finitely many discrete individuals, there is still a chance that either type will be lost to chance; to demographic stochasticity. We whish to characterize the expected waiting time for such an event to occur.&lt;/p&gt;
 &lt;p&gt;To do so, we will switch first into density and then frequency, to obtain a one-dimensional expression we can solve exactly. We will then use the Arhennius approximation to obtain a closed form solution. First, we will replace the discrete number of individuals &lt;span class=&quot;math&quot;&gt;\(N\)&lt;/span&gt; with the macroscopic, continuous variable &lt;span class=&quot;math&quot;&gt;\(n\)&lt;/span&gt;, representing the mean &lt;em&gt;density&lt;/em&gt; of individuals; &lt;span class=&quot;math&quot;&gt;\(N/A\)&lt;/span&gt;, where &lt;span class=&quot;math&quot;&gt;\(A\)&lt;/span&gt; is the area in which &lt;span class=&quot;math&quot;&gt;\(N\)&lt;/span&gt; individuals are found. For suitably large &lt;span class=&quot;math&quot;&gt;\(A\)&lt;/span&gt;, we will be able to accurately describe &lt;span class=&quot;math&quot;&gt;\(n\)&lt;/span&gt; with a coupled stochastic differential equation for each population. By changing variables once more into the frequency of one type, &lt;span class=&quot;math&quot;&gt;\(p = n_1/(n_1+n_2)\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(n = n_1 + n_2\)&lt;/span&gt;, we are able to do a timescale seperation to focus on the dynamics in a single variable, &lt;span class=&quot;math&quot;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;The master equation that describes the probability of observing &lt;span class=&quot;math&quot;&gt;\(N_i\)&lt;/span&gt; individuals of type &lt;span class=&quot;math&quot;&gt;\(i\)&lt;/span&gt; is given by,&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[\begin{aligned}
@@ -6807,7 +6793,7 @@ d(N) = &amp;amp; r \frac{\sum_yN(y,t)C(x,y)}{K(x)} .\label{general_logistic}\end
 &lt;img src=&quot;http://farm6.staticflickr.com/5549/9624790208_a866e5f8f1_o.png&quot; /&gt;
 &lt;/figure&gt;
 &lt;h2 id=&quot;coexistence&quot;&gt;Coexistence&lt;/h2&gt;
-&lt;p&gt;Consider a population of two coexisting types, characterized by traits &lt;span class=&quot;math&quot;&gt;\(x_1\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(x_2\)&lt;/span&gt; respectively. The birth and death rates of each population are then given by expression  . We’ll assume that the populations can coexist, that is &lt;span class=&quot;math&quot;&gt;\((x_1, x_2)\)&lt;/span&gt; falls into the coexistence region &lt;span class=&quot;math&quot;&gt;\(P_2\)&lt;/span&gt;; &lt;em&gt;i.e.&lt;/em&gt; that &lt;span class=&quot;math&quot;&gt;\(C(x_1,x_2)K(x_2) /K_1(x_1) &amp;lt; 1 \)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(C(x_1, x_2) K(x_1)/K(x_2) &amp;lt; 1\)&lt;/span&gt;. This guarentees that each population has a positive expected growth rate when rare. However, because the population is composed of finitely many discrete individuals, there is still a chance that either type will be lost to chance; to demographic stochasticity. We whish to characterize the expected waiting time for such an event to occur.&lt;/p&gt;
+&lt;p&gt;Consider a population of two coexisting types, characterized by traits &lt;span class=&quot;math&quot;&gt;\(x_1\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(x_2\)&lt;/span&gt; respectively. The birth and death rates of each population are then given by expression  . We’ll assume that the populations can coexist, that is &lt;span class=&quot;math&quot;&gt;\((x_1, x_2)\)&lt;/span&gt; falls into the coexistence region &lt;span class=&quot;math&quot;&gt;\(P_2\)&lt;/span&gt;; &lt;em&gt;i.e.&lt;/em&gt; that $C(x_1,x_2)K(x_2) /K_1(x_1) &amp;lt; 1 $ and &lt;span class=&quot;math&quot;&gt;\(C(x_1, x_2) K(x_1)/K(x_2) &amp;lt; 1\)&lt;/span&gt;. This guarentees that each population has a positive expected growth rate when rare. However, because the population is composed of finitely many discrete individuals, there is still a chance that either type will be lost to chance; to demographic stochasticity. We whish to characterize the expected waiting time for such an event to occur.&lt;/p&gt;
 &lt;p&gt;To do so, we will switch first into density and then frequency, to obtain a one-dimensional expression we can solve exactly. We will then use the Arhennius approximation to obtain a closed form solution. First, we will replace the discrete number of individuals &lt;span class=&quot;math&quot;&gt;\(N\)&lt;/span&gt; with the macroscopic, continuous variable &lt;span class=&quot;math&quot;&gt;\(n\)&lt;/span&gt;, representing the mean &lt;em&gt;density&lt;/em&gt; of individuals; &lt;span class=&quot;math&quot;&gt;\(N/A\)&lt;/span&gt;, where &lt;span class=&quot;math&quot;&gt;\(A\)&lt;/span&gt; is the area in which &lt;span class=&quot;math&quot;&gt;\(N\)&lt;/span&gt; individuals are found. For suitably large &lt;span class=&quot;math&quot;&gt;\(A\)&lt;/span&gt;, we will be able to accurately describe &lt;span class=&quot;math&quot;&gt;\(n\)&lt;/span&gt; with a coupled stochastic differential equation for each population. By changing variables once more into the frequency of one type, &lt;span class=&quot;math&quot;&gt;\(p = n_1/(n_1+n_2)\)&lt;/span&gt; and &lt;span class=&quot;math&quot;&gt;\(n = n_1 + n_2\)&lt;/span&gt;, we are able to do a timescale seperation to focus on the dynamics in a single variable, &lt;span class=&quot;math&quot;&gt;\(p\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;The master equation that describes the probability of observing &lt;span class=&quot;math&quot;&gt;\(N_i\)&lt;/span&gt; individuals of type &lt;span class=&quot;math&quot;&gt;\(i\)&lt;/span&gt; is given by,&lt;/p&gt;
 &lt;p&gt;&lt;span class=&quot;math&quot;&gt;\[\begin{aligned}
@@ -7720,13 +7706,13 @@ T(x) &amp;amp;= \frac{2 \left[\left(\int_a^x\frac{\mathrm{d}y}{\psi(y)}\right)\i
 &lt;/ul&gt;
 &lt;h2 id=&quot;misc-notes&quot;&gt;Misc / Notes&lt;/h2&gt;
 &lt;h3 id=&quot;f1000-reviews&quot;&gt;F1000 reviews&lt;/h3&gt;
-&lt;p&gt;﻿Constable, H. et al., 2010. VertNet: a new model for biodiversity data sharing. PLoS biology, 8(2), e1000309. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20169109&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20169109&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20169109&lt;/a&gt;. &lt;em&gt;Must read&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;﻿Constable, H. et al., 2010. VertNet: a new model for biodiversity data sharing. PLoS biology, 8(2), e1000309. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20169109&quot; class=&quot;uri&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/20169109&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/20169109&lt;/a&gt;. &lt;em&gt;Must read&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; Authors describe VertNet, a cloud-computing resource for vertibrate biodiversity data. Data is publicly accessible can be user annotated while remaining contributor-mediated, retaining primacy and expertise of the orignal contributor.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Opinion:&lt;/strong&gt; Scientists have long argued for the importance of openly accessible, standardized and georeferenced biodiversity data. This work represents a significant accomplishment in overcoming technological, sociological, and idiosynchratic barriers to make this a reality.&lt;/p&gt;
-&lt;p&gt;&lt;br /&gt; ﻿Cadotte, M.W. et al., 2010. Phylogenetic diversity metrics for ecological communities: integrating species richness, abundance and evolutionary history. Ecology Letters, 13(1), 96-105. Available at: &lt;a href=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01405.x&quot; title=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01405.x&quot;&gt;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01405.x&lt;/a&gt;. &lt;em&gt;Recommended&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt; ﻿Cadotte, M.W. et al., 2010. Phylogenetic diversity metrics for ecological communities: integrating species richness, abundance and evolutionary history. Ecology Letters, 13(1), 96-105. Available at: &lt;a href=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01405.x&quot; class=&quot;uri&quot; title=&quot;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01405.x&quot;&gt;http://blackwell-synergy.com/doi/abs/10.1111/j.1461-0248.2009.01405.x&lt;/a&gt;. &lt;em&gt;Recommended&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; Existing phylogenetic diversity metrics do not account for relative abundance.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Opinion:&lt;/strong&gt; This work represents a significant improvement on existing approaches of phylogenetic diversity which are commonly used to evaluate species conservation value.&lt;/p&gt;
-&lt;p&gt;&lt;br /&gt; Ziebarth, N.L., Abbott, K.C. &amp;amp; Ives, A.R., 2010. Weak population regulation in ecological time series. Ecology letters, 13(1), 21-31. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/19849710&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/19849710&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/19849710&lt;/a&gt;. &lt;em&gt;Recommended&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt; Ziebarth, N.L., Abbott, K.C. &amp;amp; Ives, A.R., 2010. Weak population regulation in ecological time series. Ecology letters, 13(1), 21-31. Available at: &lt;a href=&quot;http://www.ncbi.nlm.nih.gov/pubmed/19849710&quot; class=&quot;uri&quot; title=&quot;http://www.ncbi.nlm.nih.gov/pubmed/19849710&quot;&gt;http://www.ncbi.nlm.nih.gov/pubmed/19849710&lt;/a&gt;. &lt;em&gt;Recommended&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Summary:&lt;/strong&gt; Authors evaluate two large data collections of population dynamics to find that many long time series express only weak regulation using autoregressive moving average (ARMA) models. The variation of the stationary distribution relative to the variation in the moving average component is taken as the measure of population regulation (1 if strong, much larger under weaker regulation).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Opinion:&lt;/strong&gt; An intriguing paper that brings extensive analysis to a long-standing and fundamental question in population biology. These methods deserve further exploration for their ability to detect strong regulation, as it should be possible to establish confidence intervals on this estimate.&lt;/p&gt;
 &lt;h3 id=&quot;mendeley&quot;&gt;Mendeley&lt;/h3&gt;
@@ -7776,9 +7762,9 @@ T(x) &amp;amp;= \frac{2 \left[\left(\int_a^x\frac{\mathrm{d}y}{\psi(y)}\right)\i
 &lt;li&gt;&lt;p&gt;Seminar nominations – submitted. &lt;a href=&quot;http://kinglab.eeb.lsa.umich.edu/&quot; title=&quot;http://kinglab.eeb.lsa.umich.edu/&quot;&gt;Aaron King&lt;/a&gt;, &lt;a href=&quot;http://evolution.genetics.washington.edu/&quot; title=&quot;http://evolution.genetics.washington.edu/&quot;&gt;Joe Felsenstein&lt;/a&gt;, &lt;a href=&quot;http://xcelab.net/rm/&quot; title=&quot;http://xcelab.net/rm/&quot;&gt;Richard McElreath&lt;/a&gt;, &lt;a href=&quot;http://www.webpages.uidaho.edu/~lukeh/index.html&quot; title=&quot;http://www.webpages.uidaho.edu/~lukeh/index.html&quot;&gt;Luke Harmon&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;F1000 Reviews&lt;/strong&gt; Need to submit evaluations&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;[1] Weak population regulation in ecological time series Nicolas L. Ziebarth, Karen C. Abbott, Anthony R. Ives &lt;a href=&quot;http://www3.interscience.wiley.com/journal/122659274/abstract&quot; title=&quot;http://www3.interscience.wiley.com/journal/122659274/abstract&quot;&gt;http://www3.interscience.wiley.com/journal/122659274/abstract&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;[2] Field theory for biogeography: a spatially explicit model for predicting patterns of biodiversity James P. O’Dwyer, Jessica L. Green &lt;a href=&quot;http://www3.interscience.wiley.com/journal/122680792/abstract&quot; title=&quot;http://www3.interscience.wiley.com/journal/122680792/abstract&quot;&gt;http://www3.interscience.wiley.com/journal/122680792/abstract&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;[3] Phylogenetic diversity metrics for ecological communities: integrating species richness, abundance and evolutionary history Marc W. Cadotte, T. Jonathan Davies, James Regetz, Steven W. Kembel, Elsa Cleland, Todd H. Oakley &lt;a href=&quot;http://www3.interscience.wiley.com/journal/122680036/abstract&quot; title=&quot;http://www3.interscience.wiley.com/journal/122680036/abstract&quot;&gt;http://www3.interscience.wiley.com/journal/122680036/abstract&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[1] Weak population regulation in ecological time series Nicolas L. Ziebarth, Karen C. Abbott, Anthony R. Ives &lt;a href=&quot;http://www3.interscience.wiley.com/journal/122659274/abstract&quot; class=&quot;uri&quot; title=&quot;http://www3.interscience.wiley.com/journal/122659274/abstract&quot;&gt;http://www3.interscience.wiley.com/journal/122659274/abstract&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[2] Field theory for biogeography: a spatially explicit model for predicting patterns of biodiversity James P. O’Dwyer, Jessica L. Green &lt;a href=&quot;http://www3.interscience.wiley.com/journal/122680792/abstract&quot; class=&quot;uri&quot; title=&quot;http://www3.interscience.wiley.com/journal/122680792/abstract&quot;&gt;http://www3.interscience.wiley.com/journal/122680792/abstract&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[3] Phylogenetic diversity metrics for ecological communities: integrating species richness, abundance and evolutionary history Marc W. Cadotte, T. Jonathan Davies, James Regetz, Steven W. Kembel, Elsa Cleland, Todd H. Oakley &lt;a href=&quot;http://www3.interscience.wiley.com/journal/122680036/abstract&quot; class=&quot;uri&quot; title=&quot;http://www3.interscience.wiley.com/journal/122680036/abstract&quot;&gt;http://www3.interscience.wiley.com/journal/122680036/abstract&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;http://ievobio.org/&quot; title=&quot;http://ievobio.org/&quot;&gt;ievobio conference&lt;/a&gt;&lt;/strong&gt; Registration&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Interesting seminar by &lt;a href=&quot;http://www.cs.ucdavis.edu/people/faculty/tagkopoulos.html&quot; title=&quot;http://www.cs.ucdavis.edu/people/faculty/tagkopoulos.html&quot;&gt;Ilias Tagkopoulos&lt;/a&gt; at CPB today. Good example of high performance computing for stochastic simulations. Latest versions are also explicitly spatial. Strange choice of birth death dynamics however – fixed population size, and when birth occurs, a weaker individual is replaced, when death occurs, a random individual replaces it. Resembles the Moran model, though other work has shown order is important here.&lt;/p&gt;&lt;/li&gt;
@@ -8235,35 +8221,35 @@ out[[1]] &amp;lt;- object 1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit ddf6db6fca626c8f6ed31f4ab2a7cb78ed70f226 Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Mon Mar 15 09:40:08 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   Updated doxygen comments&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 17dd3775004741c9c590828b498dacd75c5bfc49 Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Mon Mar 15 09:39:34 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   added license and multimin fn&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 02b9bfc02cb830297fc7fad81cfcd05598d482f1 Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Mon Mar 15 09:22:21 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   mcmc is basics now implemented.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 220ccae12fbbdf78cd5e082555c04b99af92c4af Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Sun Mar 14 20:51:50 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   adding the mcmc routine&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;commit 94642c8d406fb0d6e8970dc31cfd5304dda2c007 Author: Carl Boettiger &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+e+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#92;&lt;/noscript&gt; Date: Sun Mar 14 15:33:39 2010 -0700&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;   first commit&lt;/code&gt;&lt;/pre&gt;
@@ -9183,11 +9169,14 @@ h^2}) - e} \]&lt;/span&gt;&lt;/p&gt;
 &lt;/table&gt;
 &lt;h3 id=&quot;test-of-higher-order-corrections&quot;&gt;Test of higher order corrections&lt;/h3&gt;
 &lt;p&gt;I try the higher order correction to the mean dynamics (accounts for inflation effect of the variance):&lt;/p&gt;
-&lt;p&gt; E(n) = &lt;em&gt;1(n) +  ^2 &lt;/em&gt;1’’(n)&lt;/p&gt;
+&lt;p&gt; E(n) = _1(n) +  ^2 _1’’(n)&lt;/p&gt;
 &lt;p&gt;Though not surprisingly, the effect is negligible. In this case the average is slightly higher (572.5) and variance slightly lower (1349), so the curvature at equilibrium must be positive (in contrast to the deflation example with logistic or Levins model). Perhaps this is a consequence of the ergodicity assumption failing; I’ll check against simply computing ensemble variance rather than the (mean-over-ensembles) time-averaged variance.&lt;/p&gt;
 &lt;h3 id=&quot;ensemble-averaging-simulation-does-match-theory-though-time-averaging-doesnt&quot;&gt;Ensemble averaging simulation does match theory, though time averaging doesn’t&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;Okay, variance computed over ensembles only matches the theory (averaging over all time over an ensemble of 1000 I’m getting 1362 ensemble variance, while the time averaged (over a sampletime of 100, sample interval of .1, and max time 500) variance averaged over ensembles comes out a steady 2339. So much for ergodicity? &lt;strong&gt;Note:&lt;/strong&gt; these conditions should match the code found in subversion revision 25.&lt;/li&gt;
+&lt;li&gt;Okay, variance computed over ensembles only matches the theory (averaging over all time over an ensemble of 1000 I’m getting 1362 ensemble variance, while the time averaged (over a sampletime of 100, sample interval of .1, and max time 500) variance averaged over ensembles comes out a steady 2339. So much for ergodicity? &lt;strong&gt;Note:&lt;/strong&gt; these conditions should match the code found in subversion revision
+&lt;ol start=&quot;25&quot; type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;reflections-on-warning-signals-literature&quot;&gt;Reflections on Warning Signals literature&lt;/h2&gt;
 &lt;ul&gt;
@@ -9752,7 +9741,7 @@ h^2}) - e} \]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Ok, so that’s part vague list of accomplishments, part dense list of goals. Code development stage doesn’t really have simulations to chronicle with all there parameters and results to plot and show, but I’ll get there. Still figuring out what kind of notes are most useful for this stage, will be more obvious once things are coded and I can start exploring preliminary results. &lt;script type=&quot;text/javascript&quot;&gt;
 &lt;!--
 h=&#39;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&#39;;a=&#39;&amp;#64;&#39;;n=&#39;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&#39;;e=n+a+h;
-document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot;&gt;&#39;+&#39;Comments&#39;+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
+document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39;+&#39;:&#39;+e+&#39;&quot; clas&#39;+&#39;s=&quot;em&#39; + &#39;ail&quot;&gt;&#39;+&#39;Comments&#39;+&#39;&lt;\/&#39;+&#39;a&#39;+&#39;&gt;&#39;);
 // --&gt;
 &lt;/script&gt;&lt;noscript&gt;&amp;#x43;&amp;#x6f;&amp;#x6d;&amp;#x6d;&amp;#x65;&amp;#110;&amp;#116;&amp;#x73;&amp;#32;&amp;#40;&amp;#x63;&amp;#98;&amp;#x6f;&amp;#x65;&amp;#116;&amp;#116;&amp;#x69;&amp;#x67;&amp;#32;&amp;#x61;&amp;#116;&amp;#32;&amp;#x67;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#32;&amp;#100;&amp;#x6f;&amp;#116;&amp;#32;&amp;#x63;&amp;#x6f;&amp;#x6d;&amp;#x29;&lt;/noscript&gt; welcome; they can also be added to the talk page or directly to this notebook. Hope to figure out how to get a comment form bubble to appear so viewers can leave in-notebook comments without wiki-editing (possibly without logging in to OWW?). Thoughts on how to do that also appreciated.&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -9959,8 +9948,6 @@ document.write(&#39;&lt;a h&#39;+&#39;ref&#39;+&#39;=&quot;ma&#39;+&#39;ilto&#39
    <id>/01/10/cpb-thesis-proposal</id>
    <content type="html">&lt;p&gt;In the spirit of archiving work in the lab notebook, this was my PhD dissertation proposal, a requirement to advance to candidacy submitted before our oral defense in the second or third year. Following some excellent advice, this is focused more narrowly than my actual dissertation. As a historical note, I started keeping an open lab notebook the month following this, on OpenWetWare (so work leading up to this isn’t archived, though admittedly first two years were largely coursework). I’ve back-dated the post to the date on the proposal.&lt;/p&gt;
 &lt;embed src=&quot;http://www.carlboettiger.info/assets/files/thesis_proposal.pdf&quot; width=700 height=500&gt;
-
-
 </content>
  </entry>
  

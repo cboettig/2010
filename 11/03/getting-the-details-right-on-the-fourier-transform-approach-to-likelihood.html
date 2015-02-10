@@ -112,9 +112,9 @@
 <p>We evaluate the correlation function of their Fourier transform (note $ x () $ is really $ x()$, the new transformed variable, I’ve dropped the tilde only out of laziness):</p>
 <p><span class="math">\[ \langle x(\omega) x(\omega&#39;) \rangle = \langle \int dt e^{i\omega t} x(t) \int dt&#39; e^{i\omega&#39; t&#39;} x(t&#39;) \rangle \]</span></p>
 <p>Bringing the expectation inside (by linearity) <span class="math">\[ \int dt \int dt&#39; e^{i(\omega t+\omega&#39; t&#39;)}  \langle x(t)  x(t&#39;) \rangle \]</span></p>
-<p>Defining $ = t-t’<span class="math">\(, using the definition of the correlation function we have \)</span>$ dt e^{i (+‘) t’} d e^{-i ’ } C() $$</p>
+<p>Defining $ = t-t’$, using the definition of the correlation function we have <span class="math">\[ \int dt e^{i (\omega+\omega&#39;) t&#39;} \int d \tau e^{-i \omega&#39; \tau} C(\tau) \]</span></p>
 <p>And we see that the $ t $ integral is the (two pi times the) delta function, hence<span class="math">\[ \langle x(\omega) x(\omega&#39;) \rangle = 2 \pi  \delta (\omega + \omega&#39;) \int d \tau e^{i \omega \tau}  C(\tau) \]</span></p>
-<p>Note that in the last step we use the fact that delta fn is zero except where $ = -’<span class="math">\(, and we _define_ this last integral as the Power spectrum, \)</span> S()<span class="math">\(.   Noting that as it is complex, \)</span> x(-) = x(^*) $, so</p>
+<p>Note that in the last step we use the fact that delta fn is zero except where $ = -’$, and we <em>define</em> this last integral as the Power spectrum, $ S()$.   Noting that as it is complex, $ x(-) = x(^*) $, so</p>
 <p><span class="math">\[ \langle x(\omega) x^*(\omega&#39; ) \rangle = 2\pi  \delta(\omega -\omega&#39;) S(\omega) \]</span>,</p>
 <p>or at $ = -$, we have as claimed:</p>
 <p><span class="math">\[ \langle x(\omega) x^*(\omega) \rangle = 2\pi S(\omega) \]</span>.</p>
